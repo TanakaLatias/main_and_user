@@ -10,10 +10,10 @@
 <p class="detail_text">{{ blog.text }}</p>
 
 <div class ="image_block">
-    {% if blog.image_01 %}<div class="image_div"><img src="{{ blog.image_01.url }}" alt="image_01"></div>{% endif %}
-    {% if blog.image_02 %}<div class="image_div"><img src="{{ blog.image_02.url }}" alt="image_02"></div>{% endif %}
-    {% if blog.image_03 %}<div class="image_div"><img src="{{ blog.image_03.url }}" alt="image_03"></div>{% endif %}
-    {% if blog.image_04 %}<div class="image_div"><img src="{{ blog.image_04.url }}" alt="image_04"></div>{% endif %}
+    {% if blog.image_01 %}<div class="image_div"><img src="/{{ blog.image_01.url }}" alt="image_01"></div>{% endif %}
+    {% if blog.image_02 %}<div class="image_div"><img src="/{{ blog.image_02.url }}" alt="image_02"></div>{% endif %}
+    {% if blog.image_03 %}<div class="image_div"><img src="/{{ blog.image_03.url }}" alt="image_03"></div>{% endif %}
+    {% if blog.image_04 %}<div class="image_div"><img src="/{{ blog.image_04.url }}" alt="image_04"></div>{% endif %}
 </div>
 
 <div class="detail_info">
