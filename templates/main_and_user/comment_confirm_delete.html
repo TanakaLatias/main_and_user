@@ -1,0 +1,18 @@
+{%extends 'main_and_user/base.html'%}
+
+{% block title %}Blog Delete Confirm{% endblock title %}
+{% block page_title %}Blog Delete Confirm Page{% endblock page_title %}
+{% block page_desc %}{% endblock page_desc %}
+
+{%block content%}
+
+	<form method="post" class="card">
+		{% csrf_token %}
+		<p>Are you sure that you want to delete "{{ comment }}"?</p>
+		<p class="form-buttons">
+			<input type="submit" class="btn btn-primary" value="Delete">
+			<a href="{% url 'blog_detail' comment.blog.id %}" class="btn btn-outline">Cancel</a>
+		</p>
+	</form>
+
+{%endblock content%}

@@ -1,0 +1,78 @@
+{%load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="viewport" content="width=device-width,initial-scale=1">
+        <link rel="stylesheet" href="{% static 'css/main_and_user/base.css' %}" />
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200&display=swap" rel="stylesheet">
+        <title>{% block title %}{% endblock title %}</title>
+    </head>
+
+    <body>
+
+        <header id="header">
+            <nav id="nav">
+                <ul>
+                <li><a href="{%url 'top' %}">Top</a></li>
+                <li><a href="{% url 'about' %}">About</a></li>
+                <li><a href="{% url 'post_index' %}">Post Index</a></li>
+                {% if user.is_authenticated %}<li><a href="{% url 'post_create' %}">Post Create</a></li>{% endif %}
+                <li><a href="{% url 'genre_index' %}">Genre Index</a></li>
+                {% if user.is_authenticated %}<li><a href="{% url 'genre_create' %}">Genre Create</a></li>{% endif %}
+                <li><a href="{% url 'blog_index' %}">Blog Index</a></li>
+                {% if user.is_authenticated %}<li><a href="{% url 'blog_create' %}">Blog Create</a></li>{% endif %}
+                <li><a href="{% url 'contact' %}">Contact</a></li>
+                </ul>
+            </nav>
+            <div id="hamburger">
+                <span class="inner_line" id="line1"></span>
+                <span class="inner_line" id="line2"></span>
+                <span class="inner_line" id="line3"></span>
+              </div>
+              <h1 class="title">Memories With Music</h1>
+        </header>
+
+        <div class="right_box"></div>
+        <div class="middle_box">
+            <div class="middle_middle_box">
+                <h3 class="page_title">{% block page_title %}{% endblock page_title %}</h3>
+                <h5 class="page_desc">{% block page_desc %}{% endblock page_desc %}</h5>
+                <div class="content">{% block content %}{% endblock content %}</div>
+                <li class="return_to_top"><a href="{%url 'top' %}">Return to Top Page.</a></li>
+            </div>
+        </div>
+        <div class="left_box"></div>
+        
+    </body>
+
+    <footer>
+        <p class="footer_p">Some information should be placed here so that the footer looks a little lighter.</p>
+        <p class="footer_p">But it's too bad that there is no information to type right now.</p>
+        {% if user.is_authenticated %}
+            <li class="footer_li">Welcome back, {{ user.username }}.</li>
+            <li class="footer_li"><a href="{% url 'logout' %}" class="btn btn-primary">Logout</a></li>
+            <li class="footer_li"><a href="{% url 'information' %}" class="btn btn-primary">Information</a></li>
+        {% else %}
+            <li class="footer_li"><a href="{% url 'signup' %}" class="btn btn-primary">Signup</a></li>
+            <li class="footer_li"><a href="{% url 'login' %}" class="btn btn-primary">Login</a></li>
+        {% endif %}
+    </footer>
+
+    <script>
+        function hamburger() {
+            document.getElementById('line1').classList.toggle('line_1');
+            document.getElementById('line2').classList.toggle('line_2');
+            document.getElementById('line3').classList.toggle('line_3');
+            document.getElementById('nav').classList.toggle('in');
+        }
+        document.getElementById('hamburger').addEventListener('click' , function () {
+            hamburger();
+        } );
+    </script>
+
+</html>

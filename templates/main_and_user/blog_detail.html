@@ -1,0 +1,44 @@
+{%extends 'main_and_user/base.html'%}
+{%load static %}
+
+{% block title %}Blog Detail{% endblock title %}
+{% block page_title %}Blog Detail Page{% endblock page_title %}
+{% block page_desc %}{{ blog.title }}{% endblock page_desc %}
+
+{% block content %}
+
+<p class="detail_text">{{ blog.text }}</p>
+
+<div class ="image_block">
+    {% if blog.image_01 %}<div class="image_div"><img src="{{ blog.image_01.url }}" alt="image_01"></div>{% endif %}
+    {% if blog.image_02 %}<div class="image_div"><img src="{{ blog.image_02.url }}" alt="image_02"></div>{% endif %}
+    {% if blog.image_03 %}<div class="image_div"><img src="{{ blog.image_03.url }}" alt="image_03"></div>{% endif %}
+    {% if blog.image_04 %}<div class="image_div"><img src="{{ blog.image_04.url }}" alt="image_04"></div>{% endif %}
+</div>
+
+<div class="detail_info">
+    <p>created_at: {{ blog.created_at|date:"Y-m-j" }}</p>
+    <p>updated_at: {{ blog.updated_at|date:"Y-m-j" }}</p>
+    <p>genre(s): {{ blog.genre }}</p>
+</div>
+
+{% if user.is_authenticated %}<a href="{% url 'blog_update' blog.id %}" class="edit">Update</a>{% endif %}
+{% if user.is_authenticated %}<a href="{% url 'blog_delete' blog.id %}" class="edit">Delete</a>{% endif %}
+
+<li class="leave_comment_li"><a href="{% url 'comment_create' blog.pk %}">Wanna leave a comment?</a></li>
+
+<div class="comment_all">
+{% for comment in blog.comment_set.all %}
+    <div class="each_comment">
+    <li>No. {{ forloop.counter }}</li>
+    <li>Name: {{ comment.name }}</li>
+    <li>Title: {{ comment.title }}</li>
+    <li>Text: {{ comment.text }}</li>
+    <li>Date: {{ comment.posted_at|date:"Y-m-j" }}</li>
+    {% if user.is_authenticated %}<a href="{% url 'comment_update' comment.pk %}" class="edit">CommentUpdate</a>{% endif %}
+    {% if user.is_authenticated %}<a href="{% url 'comment_delete' comment.pk %}" class="edit">CommentDelete</a>{% endif %}
+</div>
+{% endfor %}
+</div>
+
+{% endblock content %}

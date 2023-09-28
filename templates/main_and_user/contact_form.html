@@ -1,0 +1,17 @@
+{% extends "main_and_user/base.html" %}
+
+{% block title %}Contact{% endblock title %}
+{% block page_title %}Contact Page{% endblock page_title %}
+{% block page_desc %}Thanks for giving me an email :){% endblock page_desc %}
+
+{% block content %}
+<div class="contact_content">
+  <p class="contact_p">This form requires your email adress, but for some technical reasons it just disappears and I can't send you a response. So please just fill in a dammy adress there and I'll reply to you in my blog post.</p>
+  <div class="form_div">
+      <form method="POST" class="form_form">{% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-primary form_button">Submit</button>
+      </form>
+  </div>
+</div>
+{% endblock content %}

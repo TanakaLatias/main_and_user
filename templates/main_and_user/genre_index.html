@@ -1,0 +1,44 @@
+{%extends 'main_and_user/base.html'%}
+
+{% block title %}Genre{% endblock title %}
+{% block page_title %}Genre Page{% endblock page_title %}
+{% block page_desc %}Here are all posts sorted by genre.{% endblock page_desc %}
+
+{% block content %}
+<div class="genre_index_content">
+    <div class="accordion">
+        {% for genre in genres %}
+        <h3 class="menu js-menu index_h1">{{ genre }}</h3>
+        <div class="contents is-open">
+        <p class="index_p">{{ genre.text | truncatechars:100 }}<a href="{% url 'genre_detail' genre.id %}">...->Read more</a></p>
+                {% for post in posts %}
+                    {% if genre.title in post.genre %}
+                    <p class="index_p"><a href="{% url 'post_detail' post.id %}">{{ post.id }}. </a>{{ post.title }}
+                    {% if post.created_at > recent %}new!{% elif post.updated_at > recent %}Updated!{% endif %}</p>
+                    {% endif %}
+                {% endfor %}
+        </div>
+        {% endfor %}
+    </div>
+
+</div>
+
+<script>
+    
+const menu = document.querySelectorAll(".js-menu");
+
+function toggle() {
+    const content = this.nextElementSibling;
+    const content_two = content.nextElementSibling;
+    this.classList.toggle("is-active");
+    content.classList.toggle("is-open");
+    content_two.classList.toggle("is-open");
+}
+
+for (let i = 0; i < menu.length; i++) {
+    menu[i].addEventListener("click", toggle);
+}
+
+</script>
+
+{% endblock content %}

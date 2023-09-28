@@ -1,0 +1,14 @@
+{% extends 'main_and_user/base.html' %}
+
+{% block title %}Blog Create/Update{% endblock title %}
+{% block page_title %}Blog Create/Update Page{% endblock page_title %}
+{% block page_desc %}{% endblock page_desc %}
+
+{% block content %}
+<div class="form_div">
+    <form method="POST" class="form_form" enctype="multipart/form-data">{% csrf_token %}
+      {{ form.as_p }}
+      <button type="submit" class="btn btn-primary form_button">Submit</button>
+    </form>
+</div>
+{% endblock content %}

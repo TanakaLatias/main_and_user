@@ -1,0 +1,30 @@
+{%extends 'main_and_user/base.html'%}
+{%load static %}
+
+{% block title %}Genre Detail{% endblock title %}
+{% block page_title %}Genre Detail Page{% endblock page_title %}
+{% block page_desc %}{{ genre.title }}{% endblock page_desc %}
+
+{% block content %}
+
+<p class="detail_text">{{ genre.text }}</p>
+
+<div class ="image_block">
+    {% if genre.image_01 %}<div class="image_div"><img src="{{ genre.image_01.url }}" alt="image_01"></div>{% endif %}
+    {% if genre.image_02 %}<div class="image_div"><img src="{{ genre.image_02.url }}" alt="image_02"></div>{% endif %}
+    {% if genre.image_03 %}<div class="image_div"><img src="{{ genre.image_03.url }}" alt="image_03"></div>{% endif %}
+    {% if genre.image_04 %}<div class="image_div"><img src="{{ genre.image_04.url }}" alt="image_04"></div>{% endif %}
+</div>
+
+<p class="related_blog_posts">Related blog posts.</p>
+{% for blog_post in blog_posts %}
+    {% if genre.title in blog_post.genre %}
+    <p><a href="{% url 'blog_detail' blog_post.id %}">{{ blog_post.title }}</a></p>
+    <p class="relapos_p">{{ blog_post.text | truncatechars:100 }}</p>
+    {% endif %}
+{% endfor %}
+
+{% if user.is_authenticated %}<a href="{% url 'genre_update' genre.id %}" class="edit">Update</a>{% endif %}
+{% if user.is_authenticated %}<a href="{% url 'genre_delete' genre.id %}" class="edit">Delete</a>{% endif %}
+
+{% endblock content %}

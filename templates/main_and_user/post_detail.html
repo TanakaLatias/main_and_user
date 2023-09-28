@@ -1,0 +1,30 @@
+{%extends 'main_and_user/base.html'%}
+{%load static %}
+
+{% block title %}Post Detail{% endblock title %}
+{% block page_title %}Post Detail Page{% endblock page_title %}
+{% block page_desc %}{{ post.title }}{% endblock page_desc %}
+
+{% block content %}
+
+<p class="detail_text">{{ post.text }}</p>
+
+<div class ="image_block">
+    {% if post.image_01 %}<div class="image_div"><img src="{{ post.image_01.url }}" alt="image_01"></div>{% endif %}
+    {% if post.image_02 %}<div class="image_div"><img src="{{ post.image_02.url }}" alt="image_02"></div>{% endif %}
+    {% if post.image_03 %}<div class="image_div"><img src="{{ post.image_03.url }}" alt="image_03"></div>{% endif %}
+    {% if post.image_04 %}<div class="image_div"><img src="{{ post.image_04.url }}" alt="image_04"></div>{% endif %}
+</div>
+
+<div class="detail_info">
+    <p>created_at: {{ post.created_at|date:"Y-m-j" }}</p>
+    <p>updated_at: {{ post.updated_at|date:"Y-m-j" }}</p>
+    <p>song_published_at: {{ post.song_published_at|date:"Y-m-j" }}</p>
+    <p>singer(s): {{ post.category }}</p>
+    <p>genre(s): {{ post.genre }}</p>
+</div>
+
+{% if user.is_authenticated %}<a href="{% url 'post_update' post.id %}" class="edit">Update</a>{% endif %}
+{% if user.is_authenticated %}<a href="{% url 'post_delete' post.id %}" class="edit">Delete</a>{% endif %}
+
+{% endblock content %}

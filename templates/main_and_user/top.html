@@ -1,0 +1,25 @@
+{%extends 'main_and_user/base.html'%}
+
+{% block title %}Top{% endblock title %}
+{% block page_title %}Top Page{% endblock page_title %}
+{% block page_desc %}Thanks for visiting my website :){% endblock page_desc %}
+
+{% block content %}
+
+    <div class="top_content">
+        <p class="top_p">About this website and me.</p>
+        <li class="top_li"><a href="{% url 'about' %}">-></a>About</li>
+        <p class="top_p">See all my posts sorted by singer.</p>
+        <li class="top_li"><a href="{% url 'post_index' %}">-></a>Post Index</li>
+        {% if user.is_authenticated %}<p class="top_p">Post Create</p><li class="top_li"><a href="{% url 'post_create' %}">-></a>PostCreate</li>{% endif %}
+        <p class="top_p">See all my posts sorted by genre.</p>
+        <li class="top_li"><a href="{% url 'genre_index' %}">-></a>Genre Index</li>
+        {% if user.is_authenticated %}<p class="top_p">Genre Create</p><li class="top_li"><a href="{% url 'genre_create' %}">-></a>Genre Create</li>{% endif %}
+        <p class="top_p">Check my blog(I reply to your messages here!).</p>
+        <li class="top_li"><a href="{% url 'blog_index' %}">-></a>Blog Index</li>
+        {% if user.is_authenticated %}<p class="top_p">Blog Create</p><li class="top_li"><a href="{% url 'blog_create' %}">-></a>Blog Create</li>{% endif %}
+        <p class="top_p">Send me an email.</p>
+        <li class="top_li"><a href="{% url 'contact' %}">-></a>Contact</li>
+    </div>
+
+{% endblock content %}

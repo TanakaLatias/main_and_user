@@ -1,0 +1,14 @@
+{% extends 'main_and_user/base.html' %}
+
+{% block title %}Comment{% endblock title %}
+{% block page_title %}Comment Page{% endblock page_title %}
+{% block page_desc %}Thanks for sharing your thoughts with us! (And I'm sorry, you can't edit your comment later.){% endblock page_desc %}
+
+{% block content %}
+<div class="form_div">
+    <form method="POST" class="form_form">{% csrf_token %}
+      {{ form.as_p }}
+      <button type="submit" class="btn btn-primary form_button">Submit</button>
+    </form>
+</div>
+{% endblock content %}

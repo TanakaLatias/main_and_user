@@ -1,0 +1,14 @@
+{% extends 'main_and_user/base.html' %}
+
+{% block title %}My Page{% endblock title %}
+{% block page_title %}My Page{% endblock page_title %}
+{% block page_desc %}Here is my information{% endblock page_desc %}
+
+{% block content %}
+
+{% if user.is_authenticated %}
+<p>Username: {{ request.user.username }}</p>
+<p>Email: {{ request.user.email }}</p>
+{% endif %}
+
+{% endblock content %}

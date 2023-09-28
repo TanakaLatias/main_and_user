@@ -1,0 +1,41 @@
+{%extends 'main_and_user/base.html'%}
+
+{% block title %}Post Index{% endblock title %}
+{% block page_title %}Post Index Page{% endblock page_title %}
+{% block page_desc %}Here are all posts sorted by singer.{% endblock page_desc %}
+
+{% block content %}
+<div class="post_index_content">
+    <div class="accordion">
+        {% for category in categories %}
+        <h3 class="menu js-menu index_h1">{{ category }}</h3>
+        <div class="contents is-open">
+            {% for post in posts %}
+                {% if category in post.category %}
+                <p class="index_p"><a href="{% url 'post_detail' post.id %}">{{ post.id }}.</a> {{ post.title }}
+                {% if post.created_at > recent %}new!{% elif post.updated_at > recent %}Updated!{% endif %}</p>
+                {% endif %}
+            {% endfor %}
+        </div>
+        {% endfor %}
+    </div>
+    
+</div>
+
+<script>
+    
+const menu = document.querySelectorAll(".js-menu");
+
+function toggle() {
+    const content = this.nextElementSibling;
+    this.classList.toggle("is-active");
+    content.classList.toggle("is-open");
+}
+
+for (let i = 0; i < menu.length; i++) {
+    menu[i].addEventListener("click", toggle);
+}
+
+</script>
+
+{% endblock content %}

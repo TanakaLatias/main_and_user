@@ -1,0 +1,18 @@
+{%extends 'main_and_user/base.html'%}
+
+{% block title %}Post Delete Confirm{% endblock title %}
+{% block page_title %}Post Delete Confirm Page{% endblock page_title %}
+{% block page_desc %}{% endblock page_desc %}
+
+{%block content%}
+
+	<form method="post" class="card">
+		{% csrf_token %}
+		<p>Are you sure that you want to delete "{{ post }}"?</p>
+		<p class="form-buttons">
+			<input type="submit" class="btn btn-primary" value="Delete">
+			<a href="{% url 'post_detail' post.id %}" class="btn btn-outline">Cancel</a>
+		</p>
+	</form>
+
+{%endblock content%}

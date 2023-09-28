@@ -1,0 +1,46 @@
+{%extends 'main_and_user/base.html'%}
+
+{% block title %}Blog Index{% endblock title %}
+{% block page_title %}Blog Index Page{% endblock page_title %}
+{% block page_desc %}Here are all my blog posts.{% endblock page_desc %}
+
+{% block content %}
+
+<div class="blog_index_content">
+    {% for blog in blogs %}
+    <div class="blog_index_div">
+        <h5 class="index_h5"><a href="{% url 'blog_detail' blog.pk %}">{{ blog.title }}</a>
+            {% if blog.created_at > recent %}new!{% elif blog.updated_at > recent %}Updated!{% endif %}</h5>
+        <p class="index_p">{{ blog.text | truncatechars:200 }}</p>
+    </div>
+    {% endfor %}
+</div>
+
+<!-- ページネーション用のUI -->
+<div class="pagination">
+    <span class="step-links">
+        {% if page_obj.has_previous %}
+        <span>
+            <a href="?page=1" class="page_a"> To the first page. </a>
+        </span>
+        <span>
+            <a href="?page={{ page_obj.previous_page_number }}" class="page_a"> < </a>
+        </span>
+        {% endif %}
+
+        <span>
+            <p class="page_a">Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.</p>
+        </span>
+
+        {% if page_obj.has_next %}
+        <span>
+            <a href="?page={{ page_obj.next_page_number }}" class="page_a"> > </a>
+        </span>
+        <span>
+            <a href="?page={{ page_obj.paginator.num_pages }}" class="page_a"> To the last page. </a>
+        </span>
+        {% endif %}
+    </span>
+</div>
+
+{% endblock content %}
